@@ -20,7 +20,7 @@ export async function getMosqueById(id: string): Promise<Mosque | null> {
  * Toggle favorite status for a mosque.
  * In production this would call PATCH /mosques/:id/favorite
  */
-export async function toggleFavorite(id: string, current: boolean): Promise<boolean> {
+export async function toggleFavorite(_id: string, current: boolean): Promise<boolean> {
   await new Promise((r) => setTimeout(r, 200))
   return !current
 }
