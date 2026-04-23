@@ -12,9 +12,9 @@ async function fetchHijriDate(): Promise<string | null> {
     const json = await res.json()
     if (!json.success || !json.data?.hijri) return null
 
-    const { month_name, day } = json.data.hijri
-    // Returns format like "Dhu al-Qi'dah 6" to match "Rabi' al-Thani 8"
-    return `${month_name} ${day}`
+    const { month_name, day, year } = json.data.hijri
+    // Returns format like "Dhu al-Qi'dah 6, 1447 AH"
+    return `${month_name} ${day}, ${year} AH`
   } catch (error) {
     console.error('Failed to fetch Hijri date:', error)
     return null

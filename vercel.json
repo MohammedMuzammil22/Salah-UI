@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api-hijri/:path*",
+      "destination": "https://ummahapi.com/:path*"
+    }
+  ]
+}

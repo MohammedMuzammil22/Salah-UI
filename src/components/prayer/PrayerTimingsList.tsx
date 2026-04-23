@@ -26,7 +26,7 @@ export function PrayerTimingsList({
       {/* Header Row */}
       <div className="px-5 pt-5 pb-3 flex justify-between items-center">
         <h4 className="font-headline font-bold text-base text-primary">{formattedDate}</h4>
-        <span className="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-0.5 rounded-full font-label text-[10px] font-extrabold uppercase tracking-widest">
+        <span className="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full font-label text-[11px] font-bold">
           {islamicDate}
         </span>
       </div>
