@@ -119,3 +119,15 @@ export function formatDateHeader(isoDate: string): string {
     month: 'short',
   })
 }
+
+/**
+ * Formats "HH:MM" (24h) to "h:mm AM/PM"
+ */
+export function formatTimeTo12h(time: string | null): string {
+  if (!time) return '—'
+  const [h, m] = time.split(':').map(Number)
+  const ampm = h >= 12 ? 'PM' : 'AM'
+  const h12 = h % 12 || 12
+  const mm = m.toString().padStart(2, '0')
+  return `${h12}:${mm} ${ampm}`
+}

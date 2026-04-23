@@ -1,4 +1,5 @@
 import type { PrayerWithStatus } from '../../features/mosque/types'
+import { formatTimeTo12h } from '../../utils/prayerUtils'
 
 interface PrayerRowProps {
   prayer: PrayerWithStatus
@@ -66,7 +67,7 @@ export function PrayerRow({ prayer }: PrayerRowProps) {
             ${isOptional ? 'text-sm text-on-surface-variant' : 'text-on-surface-variant'}
           `}
         >
-          {azan}
+          {formatTimeTo12h(azan)}
         </p>
       </div>
 
@@ -77,7 +78,7 @@ export function PrayerRow({ prayer }: PrayerRowProps) {
             {isCurrent ? (
               <div className="flex items-center justify-end gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-                <p className="font-headline font-extrabold text-lg text-primary">{jamaat}</p>
+                <p className="font-headline font-extrabold text-lg text-primary">{formatTimeTo12h(jamaat)}</p>
               </div>
             ) : (
               <p
@@ -86,7 +87,7 @@ export function PrayerRow({ prayer }: PrayerRowProps) {
                   ${isOptional ? 'text-sm text-on-surface-variant font-medium' : 'text-primary'}
                 `}
               >
-                {jamaat}
+                {formatTimeTo12h(jamaat)}
               </p>
             )}
             {isCurrent && (

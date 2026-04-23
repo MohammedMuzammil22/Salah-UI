@@ -5,6 +5,7 @@ export const PRAYER_ORDER: PrayerName[] = [
   'Fajr',
   'Sunrise',
   'Dhuhr',
+  'Jummah',
   'Asr',
   'Maghrib',
   'Isha',
@@ -12,16 +13,17 @@ export const PRAYER_ORDER: PrayerName[] = [
 
 /** Material Symbol icon for each prayer */
 export const PRAYER_ICONS: Record<PrayerName, string> = {
-  Fajr:    'wb_twilight',
+  Fajr: 'wb_twilight',
   Sunrise: 'wb_sunny',
-  Dhuhr:   'sunny',
-  Asr:     'cloud_queue',
+  Dhuhr: 'sunny',
+  Jummah: 'groups',
+  Asr: 'cloud_queue',
   Maghrib: 'nights_stay',
-  Isha:    'bedtime',
+  Isha: 'bedtime',
 }
 
 /** Prayers that are informational only (no jamaat) */
 export const OPTIONAL_PRAYERS: PrayerName[] = ['Sunrise']
 
 /** Default mosque ID — replace with routing param in production */
-export const DEFAULT_MOSQUE_ID = 'central-mosque-london'
+export const DEFAULT_MOSQUE_ID = 'mohideen-masjid' //central-mosque-london

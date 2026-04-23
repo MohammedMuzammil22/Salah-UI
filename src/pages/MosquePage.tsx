@@ -13,7 +13,7 @@ import { EmptyTimings } from '../components/common/EmptyTimings'
 import { MosquePageSkeleton } from '../components/common/Skeleton'
 
 // In a real app, mosqueId would come from router params
-const MOSQUE_ID = 'central-mosque-london'
+const MOSQUE_ID = 'mohideen-masjid'//central-mosque-london 
 
 export function MosquePage() {
   const { mosque, isLoading, error, toggleFav } = useMosque(MOSQUE_ID)
@@ -90,7 +90,7 @@ export function MosquePage() {
         )}
       </main>
 
-      <BottomNav active="favorites" onChange={() => {}} />
+      <BottomNav active="favorites" onChange={() => { }} />
     </>
   )
 }

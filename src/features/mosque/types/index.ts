@@ -1,6 +1,6 @@
 // ─── Prayer Types ────────────────────────────────────────────────────────────
 
-export type PrayerName = 'Fajr' | 'Sunrise' | 'Dhuhr' | 'Asr' | 'Maghrib' | 'Isha'
+export type PrayerName = 'Fajr' | 'Sunrise' | 'Dhuhr' | 'Asr' | 'Maghrib' | 'Isha' | 'Jummah'
 
 export type PrayerStatus = 'past' | 'current' | 'next' | 'upcoming'
 
