@@ -6,5 +6,14 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     base: env.VITE_BASE_PATH || '/Salah-UI',
+    server: {
+      proxy: {
+        '/api-hijri': {
+          target: 'https://ummahapi.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api-hijri/, ''),
+        },
+      },
+    },
   }
 })

@@ -2,6 +2,26 @@ import type { Mosque } from '../types'
 import { MOCK_MOSQUE } from './mockData'
 
 /**
+ * Fetches today's Hijri date from the Ummah API.
+ * Returns formatted string like "Dhu al-Qi'dah 6" or null on failure.
+ */
+async function fetchHijriDate(): Promise<string | null> {
+  try {
+    const res = await fetch('/api-hijri/api/today-hijri')
+    if (!res.ok) return null
+    const json = await res.json()
+    if (!json.success || !json.data?.hijri) return null
+
+    const { month_name, day } = json.data.hijri
+    // Returns format like "Dhu al-Qi'dah 6" to match "Rabi' al-Thani 8"
+    return `${month_name} ${day}`
+  } catch (error) {
+    console.error('Failed to fetch Hijri date:', error)
+    return null
+  }
+}
+
+/**
  * Simulates an async API fetch.
  * Replace with real HTTP call when backend is ready.
  *
@@ -10,10 +30,20 @@ import { MOCK_MOSQUE } from './mockData'
  */
 export async function getMosqueById(id: string): Promise<Mosque | null> {
   // Simulate network latency
-  await new Promise((r) => setTimeout(r, 600))
+  const [mosqueData, hijriDate] = await Promise.all([
+    new Promise<Mosque | null>((r) => {
+      setTimeout(() => {
+        r(id === MOCK_MOSQUE.id ? structuredClone(MOCK_MOSQUE) : null)
+      }, 600)
+    }),
+    fetchHijriDate()
+  ])
 
-  if (id === MOCK_MOSQUE.id) return structuredClone(MOCK_MOSQUE)
-  return null
+  if (mosqueData && hijriDate && mosqueData.timings) {
+    mosqueData.timings.islamicDate = hijriDate
+  }
+
+  return mosqueData
 }
 
 /**
