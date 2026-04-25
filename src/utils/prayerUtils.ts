@@ -33,9 +33,15 @@ export function annotatePrayerStatuses(
   now = new Date()
 ): PrayerWithStatus[] {
   const nowMin = getNowInMinutes(now)
+  const isFriday = now.getDay() === 5
 
-  // Filter out optional prayers for window calculations
-  const mainPrayers = prayers.filter((p) => !p.isOptional)
+  // Filter out optional prayers and handle Dhuhr/Jummah logic for window calculations
+  const mainPrayers = prayers.filter((p) => {
+    if (p.isOptional) return false
+    if (isFriday && p.name === 'Dhuhr') return false
+    if (!isFriday && p.name === 'Jummah') return false
+    return true
+  })
 
   // Find current prayer index among main prayers
   let currentIdx = -1
@@ -52,6 +58,15 @@ export function annotatePrayerStatuses(
   return prayers.map((prayer): PrayerWithStatus => {
     if (prayer.isOptional) {
       return { ...prayer, status: 'past' } // Sunrise is always informational
+    }
+
+    const isOmitted = (isFriday && prayer.name === 'Dhuhr') || (!isFriday && prayer.name === 'Jummah')
+
+    // For omitted prayers, they should never be 'current' or 'next'.
+    // They can be 'past' if their time has passed, or 'upcoming' otherwise.
+    if (isOmitted) {
+      const hasPassed = nowMin >= parseTimeToMinutes(prayer.azan)
+      return { ...prayer, status: hasPassed ? 'past' : 'upcoming' }
     }
 
     const mainIdx = mainPrayers.findIndex((p) => p.name === prayer.name)
@@ -83,7 +98,14 @@ export function getNextPrayer(
   now = new Date()
 ): NextPrayerInfo | null {
   const nowMin = getNowInMinutes(now)
-  const mainPrayers = prayers.filter((p) => !p.isOptional)
+  const isFriday = now.getDay() === 5
+
+  const mainPrayers = prayers.filter((p) => {
+    if (p.isOptional) return false
+    if (isFriday && p.name === 'Dhuhr') return false
+    if (!isFriday && p.name === 'Jummah') return false
+    return true
+  })
 
   for (const prayer of mainPrayers) {
     const azanMin = parseTimeToMinutes(prayer.azan)

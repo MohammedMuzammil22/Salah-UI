@@ -88,6 +88,18 @@ export function MosquePage() {
             <FacilityChips facilities={mosque.facilities} />
           </section>
         )}
+
+        {/* Attribution */}
+        <section className="mt-8 mb-2 text-center">
+          <a
+            href="https://www.linkedin.com/in/mohammed-muzammil22/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] font-label tracking-wide text-on-surface-variant/50 hover:text-on-surface-variant/80 transition-colors"
+          >
+            Made with ❤️ for the Ummah • Muzammil
+          </a>
+        </section>
       </main>
 
       <BottomNav active="favorites" onChange={() => { }} />
